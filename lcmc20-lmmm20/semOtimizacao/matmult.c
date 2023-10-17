@@ -3,8 +3,11 @@
 #include <string.h>
 #include <getopt.h>    /* getopt */
 #include <time.h>
-
+#include <likwid.h>
+#include <likwid-marker.h>
 #include "matriz.h"
+
+#define DEBUG 1
 
 /**
  * Exibe mensagem de erro indicando forma de uso do programa e termina
@@ -28,7 +31,7 @@ static void usage(char *progname)
 
 int main (int argc, char *argv[]) 
 {
-  int c, n=DEF_SIZE;
+  int n=DEF_SIZE;
   
   MatRow mRow_1, mRow_2, resMat;
   Vetor vet, res;
@@ -41,10 +44,11 @@ int main (int argc, char *argv[])
   n = atoi(argv[1]);
   
   /* ================ FIM DO TRATAMENTO DE LINHA DE COMANDO ========= */
- 
+  // LIKWID_MARKER_INIT
+  likwid_markerInit();
   srandom(20232);
       
-  res = (real_t *) malloc (n*sizeof(real_t));
+  res = geraVetor(n, 1);
   resMat = geraMatRow(n, n, 1);
     
   mRow_1 = geraMatRow (n, n, 0);
@@ -58,11 +62,19 @@ int main (int argc, char *argv[])
     prnVetor (vet, n);
     printf ("=================================\n\n");
 #endif /* _DEBUG_ */
-
+  
+  // LIKWID_MARKER_START("multMatVet");
+  likwid_markerStartRegion("multMatVet");
   multMatVet (mRow_1, vet, n, n, res);
-    
+  likwid_markerStopRegion("multMatVet");
+  // LIKWID_MARKER_STOP("multMatVet");
+
+  // LIKWID_MARKER_START("multMatMat");
+  likwid_markerStartRegion("multMatMat");
   multMatMat (mRow_1, mRow_2, n, resMat);
-    
+  likwid_markerStopRegion("multMatMat");
+  // LIKWID_MARKER_STOP("multMatMat");
+
 #ifdef DEBUG
     prnVetor (res, n);
     prnMat (resMat, n, n);
@@ -74,6 +86,8 @@ int main (int argc, char *argv[])
   liberaVetor ((void*) vet);
   liberaVetor ((void*) res);
 
+  likwid_markerClose();
+  // LIKWID_MARKER_CLOSE
   return 0;
 }
 

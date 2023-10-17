@@ -73,13 +73,14 @@ Vetor geraVetor (int n, int zerar)
 {
   Vetor vetor = (real_t *) malloc(n*sizeof(real_t));
 
-  if (vetor)
+  if(vetor)
+  {
     if (zerar)
       memset(vetor,0,n*sizeof(real_t));
     else
       for (int i=0; i < n; ++i)
-	vetor[i] = generateRandomB();
-
+	      vetor[i] = generateRandomB();
+  }
   return (vetor);
 }
 
@@ -94,7 +95,6 @@ void liberaVetor (void *vet)
 	free(vet);
 }
 
-
 /**
  *  Funcao multMatVet:  Efetua multiplicacao entre matriz 'mxn' por vetor
  *                       de 'n' elementos
@@ -106,12 +106,25 @@ void liberaVetor (void *vet)
  *  @return vetor de 'm' elementos
  *
  */
+// Original
+// void multMatVet (MatRow mat, Vetor v, int m, int n, Vetor res)
+// {
+    
+//   /* Efetua a multiplicação */
+//   if (res) {
+    
+//     for (int i=0; i < m; ++i)
+//       for (int j=0; j < n; ++j)
+//         res[i] += mat[n*i + j] * v[j];
+//   }
+// }
 
 void multMatVet (MatRow mat, Vetor v, int m, int n, Vetor res)
 {
     
   /* Efetua a multiplicação */
   if (res) {
+    
     for (int i=0; i < m; ++i)
       for (int j=0; j < n; ++j)
         res[i] += mat[n*i + j] * v[j];
@@ -128,6 +141,16 @@ void multMatVet (MatRow mat, Vetor v, int m, int n, Vetor res)
  *             e com seus elementos inicializados em 0.0 (zero)
  *
  */
+
+// void multMatMat (MatRow A, MatRow B, int n, MatRow C)
+// {
+
+//   /* Efetua a multiplicação */
+//   for (int i=0; i < n; ++i)
+//     for (int j=0; j < n; ++j)
+//       for (int k=0; k < n; ++k)
+// 	C[i*n+j] += A[i*n+k] * B[k*n+j];
+// }
 
 void multMatMat (MatRow A, MatRow B, int n, MatRow C)
 {
