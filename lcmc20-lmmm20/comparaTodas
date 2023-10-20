@@ -8,6 +8,8 @@
 #
 #         perfctr 3 FLOPS_DP 64 ./matmult ./matmultOtz
 #
+
+
 METRICA="L2CACHE L3 ENERGY FLOPS_DP"
 CORE=$1
 P=$2
