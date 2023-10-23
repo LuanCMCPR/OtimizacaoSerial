@@ -1,11 +1,12 @@
 #!/bin/bash
 
-# Uso: ./geraGraficos.sh <diretorio_de_entrada_nao_otimizado > <diretorio_de_entrada_otimizado > <diretorio_de_saida>
+# Uso: ./geraGraficos.sh <diretorio_de_entrada_pontos_nao_otimizado > <diretorio_de_entrada_pontos_otimizados> <diretorio_salvar_gráficos>
+# 3 argumentos
 
 # Testa se possui argumentos
 if [ $# -lt 2 ]
 then
-    echo "Modo de Uso: ./geraGraficos.sh <diretorio_de_entrada> <diretorio_de_saida>"
+    echo "Modo de Uso: ./geraGraficos.sh <diretorio_de_entrada_pontos_nao_otimizado > <diretorio_de_entrada_pontos_otimizados> <diretorio_salvar_gráficos>"
     exit 1
 fi
 
@@ -35,8 +36,8 @@ do
     NOME2="COMPARACAO-VET-${K}"
 
     # Executa o script Gnuplot para o par de arquivos
-    gnuplot -c plotarGrafico.gp "${ARQMULTMAT[i]}" "${ARQMULTMAT_OTZ[i]}" "MATRIZ X MATRIZ - $K" "$NOME1.png" "$U"
-    gnuplot -c plotarGrafico.gp "${ARQMULTVET[i]}" "${ARQMULTVET_OTZ[i]}" "MATRIZ X VETOR - $K" "$NOME2.png" "$U"
+    gnuplot -c plotarGrafico.gp "${ARQMULTMAT[i]}" "${ARQMULTMAT_OTZ[i]}" "MATRIZ X MATRIZ - $K" "$NOME1.png" "$U" "$K"
+    gnuplot -c plotarGrafico.gp "${ARQMULTVET[i]}" "${ARQMULTVET_OTZ[i]}" "MATRIZ X VETOR - $K" "$NOME2.png" "$U" "$K"
 done    
 
 mv *.png $OUTPUT_DIR
