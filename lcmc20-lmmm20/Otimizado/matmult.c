@@ -90,10 +90,10 @@ int main (int argc, char *argv[])
   tempo = timestamp() - tempo;
   printf ("%lf\n", tempo);
 
-#ifdef DEBUG
+// #ifdef DEBUG
     prnVetor (res, n);
     prnMat (resMat, n, n);
-#endif /* DEBUG */
+// #endif /* DEBUG */
 
   liberaVetor ((void*) mRow_1);
   liberaVetor ((void*) mRow_2);

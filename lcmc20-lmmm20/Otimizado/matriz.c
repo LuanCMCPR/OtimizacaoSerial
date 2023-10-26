@@ -43,7 +43,11 @@ static inline real_t generateRandomB( )
 
 MatRow geraMatRow (int m, int n, int zerar)
 {
-  MatRow matriz = (real_t *) malloc(m*n*sizeof(real_t));
+  MatRow matriz;
+  if((n > 0) && ((n & (n - 1)) == 0))
+    matriz = (real_t *) malloc(m*(n+1)*sizeof(real_t));
+  else
+    matriz = (real_t *) malloc((m)*(n)*sizeof(real_t));
 
   if (matriz) {
     if (zerar)
@@ -70,7 +74,11 @@ MatRow geraMatRow (int m, int n, int zerar)
 
 Vetor geraVetor (int n, int zerar)
 {
-  Vetor vetor = (real_t *) malloc(n*sizeof(real_t));
+  Vetor vetor;
+  if((n > 0) && ((n & (n - 1)) == 0))
+    vetor = (real_t *) malloc((n+1)*sizeof(real_t));
+  else
+    vetor = (real_t *) malloc(n*sizeof(real_t));
 
   if(vetor)
   {
@@ -170,24 +178,24 @@ void multMatVet (MatRow restrict mat, Vetor restrict v, int m, int n, Vetor rest
 void multMatMat (MatRow restrict A, MatRow restrict B, int n, MatRow restrict C)
 {
   /* Loop Blocking */
-  /* Delimita bloco de linhas de Início e Fim da Primeira Matriz*/
-  for(int ls=0; ls < (n/BK); ++ls)
+  int lim = (n/BK);
+  /* Delimita bloco de linhas de Início e Fim da Primeira Matriz */
+  for(int ls=0; ls < lim; ++ls)
   {  
     int istart = ls*BK;
     int iend = istart+BK;
     /* Delimita bloco das colunas de Início e Fim da Segunda Matriz */
-    for(int cs=0; cs < (n/BK); ++cs)
+    for(int cs=0; cs < lim; ++cs)
     {
       int jstart = cs*BK;
       int jend = jstart+BK;
       /* Delimita bloco das colunas de Início e Fim da Primeira Matriz 
          e Delimita linha das colunas de Início e Fim da Segunda Matriz */
-      for(int rs=0; rs < (n/BK); ++rs)
+      for(int rs=0; rs < lim; ++rs)
       {
         int kstart = rs*BK;
         int kend = kstart+BK;
         /* Loop Unroll + Jam */
-        /* Faz a multiplicação, usando*/
         for (int i=istart; i < iend; ++i)
         {
           for (int j=jstart; j < jend; j+=UF)
@@ -207,6 +215,24 @@ void multMatMat (MatRow restrict A, MatRow restrict B, int n, MatRow restrict C)
         }
       }
     }
+  
+    int lim = (n-(n%UF));
+    
+    for(int i = 0; i < n; ++i)
+      for(int j = 0; j < n; ++j)
+        for(int k = lim; k < n; ++k)
+          C[i*n+j] += A[i*n+k] * B[k*n+j];
+
+    for(int i = 0; i < lim; ++i)
+      for(int j = lim; j < n; ++j)
+        for(int k = 0; k < lim; ++k)
+          C[i*n+j] += A[i*n+k] * B[k*n+j];
+
+  
+    for(int i = lim; i < n; ++i)
+      for(int j = 0; j < n; ++j)
+        for(int k = 0; k < lim; ++k)
+          C[i*n+j] += A[i*n+k] * B[k*n+j];
   }
 }
 

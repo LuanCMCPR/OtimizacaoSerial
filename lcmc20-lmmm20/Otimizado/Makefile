@@ -9,7 +9,7 @@ LIKWID_LIB = /usr/local/lib/ # Máquina Pessoal
 #LIKWID_INCLUDE = /home/soft/likwid/lib # Máquina DINF
 #LIKWID_LIB = /home/soft/likwid/lib # Máquina DINF
 FLAGS = -Wall -g -std=gnu99 -O3 -mavx2 -march=native
-CFLAGS = -I$(LIKWID_INCLUDE) #-DLIKWID_PERFMON # Opção caso queira usar os marcadores do likwid
+CFLAGS = -I$(LIKWID_INCLUDE) -DLIKWID_PERFMON # Opção caso queira usar os marcadores do likwid
 LFLAGS = -L$(LIKWID_LIB) -llikwid
 FILES = *.c *.h *.sh LEIAME Makefile 
 DIR = lcmc20-lmmm20
