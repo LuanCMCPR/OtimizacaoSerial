@@ -141,10 +141,6 @@ void multMatVet (MatRow restrict mat, Vetor restrict v, int m, int n, Vetor rest
         res[i+1] += mat[n*(i+1) + j] * v[j];
         res[i+2] += mat[n*(i+2) + j] * v[j];
         res[i+3] += mat[n*(i+3) + j] * v[j];
-        // res[i+4] += mat[n*(i+4) + j] * v[j];
-        // res[i+5] += mat[n*(i+5) + j] * v[j];
-        // res[i+6] += mat[n*(i+6) + j] * v[j];
-        // res[i+7] += mat[n*(i+7) + j] * v[j];
       }
     
     /* Resíduo */
@@ -206,10 +202,6 @@ void multMatMat (MatRow restrict A, MatRow restrict B, int n, MatRow restrict C)
               C[i*n+(j+1)] += A[i*n+k] * B[k*n+(j+1)];  
               C[i*n+(j+2)] += A[i*n+k] * B[k*n+(j+2)];
               C[i*n+(j+3)] += A[i*n+k] * B[k*n+(j+3)];
-              // C[i*n+(j+4)] += A[i*n+k] * B[k*n+(j+4)];
-              // C[i*n+(j+5)] += A[i*n+k] * B[k*n+(j+5)];
-              // C[i*n+(j+6)] += A[i*n+k] * B[k*n+(j+6)];
-              // C[i*n+(j+7)] += A[i*n+k] * B[k*n+(j+7)];
             }
           }
         }
