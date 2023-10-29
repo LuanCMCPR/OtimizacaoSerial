@@ -150,7 +150,6 @@ void multMatVet (MatRow restrict mat, Vetor restrict v, int m, int n, Vetor rest
   }
 }
 
-
 /**
  *  Funcao multMatMat: Efetua multiplicacao de duas matrizes 'n x n' 
  *  @param A matriz 'n x n'
@@ -169,6 +168,20 @@ void multMatVet (MatRow restrict mat, Vetor restrict v, int m, int n, Vetor rest
 //     for (int j=0; j < n; ++j)
 //       for (int k=0; k < n; ++k)
 // 	C[i*n+j] += A[i*n+k] * B[k*n+j];
+// }
+
+// void multMatMat (MatRow restrict A, MatRow restrict B, int n, MatRow restrict C)
+// {
+//   int lim = (n-(n%UF));
+//   for (int i=0; i < n; ++i)
+//     for (int j=0; j < lim; j+=UF)
+//       for (int k=0; k < n; ++k)
+//       {
+//         C[i*n+j] += A[i*n+k] * B[k*n+j];
+//         C[i*n+(j+1)] += A[i*n+k] * B[k*n+(j+1)];  
+//         C[i*n+(j+2)] += A[i*n+k] * B[k*n+(j+2)];
+//         C[i*n+(j+3)] += A[i*n+k] * B[k*n+(j+3)];
+//       }
 // }
 
 void multMatMat (MatRow restrict A, MatRow restrict B, int n, MatRow restrict C)
@@ -250,4 +263,3 @@ void prnVetor (Vetor vet, int n)
     printf(DBL_FIELD, vet[i]);
   printf(SEP_RES);
 }
-

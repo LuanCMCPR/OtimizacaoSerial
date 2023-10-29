@@ -4,10 +4,10 @@
 OBJS=matriz.o matmult.o
 OUT=matmultOtimizado
 CC=gcc
-LIKWID_INCLUDE = /usr/local/include/ # Máquina Pessoal
-LIKWID_LIB = /usr/local/lib/ # Máquina Pessoal
-#LIKWID_INCLUDE = /home/soft/likwid/lib # Máquina DINF
-#LIKWID_LIB = /home/soft/likwid/lib # Máquina DINF
+# LIKWID_INCLUDE = /usr/local/include/ # Máquina Pessoal
+# LIKWID_LIB = /usr/local/lib/ # Máquina Pessoal
+LIKWID_INCLUDE = /home/soft/likwid/include # Máquina DINF
+LIKWID_LIB = /home/soft/likwid/lib # Máquina DINF
 FLAGS = -Wall -g -std=gnu99 -O3 -mavx2 -march=native
 CFLAGS = -I$(LIKWID_INCLUDE) #-DLIKWID_PERFMON # Opção caso queira usar os marcadores do likwid
 LFLAGS = -L$(LIKWID_LIB) -llikwid
@@ -27,12 +27,10 @@ matmult.o: matmult.c
 
 # Remove arquivos objeto, temporários e executável
 clean:
-	@echo "Limpando sujeira..."
 	rm -f *.o *~
 
 purge: clean
-	@echo "Faxina..."
-	rm -f $(OUT) $(DISTDIR).tar.gz
+	rm -f $(OUT) $(DISTDIR).tar.gz	
 
 # Gera um arquivo compactado com os arquivos necessários para execução do programa
 compact:

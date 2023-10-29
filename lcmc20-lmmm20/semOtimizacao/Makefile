@@ -4,10 +4,12 @@
 OBJS=matriz.o matmult.o
 OUT=matmult
 CC=gcc
-LIKWID_INCLUDE = /usr/local/include/
-LIKWID_LIB = /usr/local/lib/
+# LIKWID_INCLUDE = /usr/local/include/ # Máquina Pessoal
+# LIKWID_LIB = /usr/local/lib/ # Máquina Pessoal
+LIKWID_INCLUDE = /home/soft/likwid/include # Máquina DINF
+LIKWID_LIB = /home/soft/likwid/lib # Máquina DINF
 FLAGS = -Wall -std=gnu99 -O3 -mavx2 -march=native
-CFLAGS = -I$(LIKWID_INCLUDE) # -DLIKWID_PERFMON # Opção caso queira usar os marcadores do likwid
+CFLAGS = -I$(LIKWID_INCLUDE) #-DLIKWID_PERFMON # Opção caso queira usar os marcadores do likwid
 LFLAGS = -L$(LIKWID_LIB) -llikwid
 FILES = *.c *.h *.sh LEIAME* Makefile 
 DIR = lcmc20-lmmm20
@@ -25,11 +27,9 @@ matmult.o: matmult.c
 
 # Remove arquivos objeto, temporários e executável
 clean:
-	@echo "Removendo sujeira..."
 	rm -f matmult *.o *~
 
 purge: clean
-	@echo "Faxina..."
 	rm -f $(OUT) $(DISTDIR).tar.gz
 
 # Gera um arquivo compactado com os arquivos necessários para execução do programa

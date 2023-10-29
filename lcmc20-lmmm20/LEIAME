@@ -1,0 +1,37 @@
+
+
+SCRIPTS:
+
+    1. perfectr_pontos
+        Uso: ./perfctr_pontos <executavel> <flag> <diretorio de saida>
+        flag:Utilizar "o" para quando executar com o programa otimizado
+             Utilizar "n" para quando executar com o programa não otimizado
+        - Para cada metrica indicada, salvando em arquivos, com nomes já predefinidos, o resultado obtido para cada ponto informado
+        deve ser informado também um diretório para salvar os arquivos com os dados de cada métrica
+
+    2. geraGraficos.sh
+        Uso: ./geraGraficos.sh  <diretorio_de_entrada_pontos_nao_otimizado > <diretorio_de_entrada_pontos_otimizados> <diretorio_salvar_gráficos>
+        - Este script gera os gráficos de comparação de métricas, deve ser informado onde estão os dados das metricas do programa não otimizado
+        ,do programa otimizado e também um diretório onde serão salvos os gráficos gerados.
+    
+    3. plotarGraico.gp
+        Uso: Gnuplot -c plotarGrafico.gp <arquivo1> <arquivo2> <titulo com metrica> <nome> <unidade eixo y> <metrica>
+        - Este script gera o gráfico de comparação
+
+    4. compara
+        Uso: ./compara <métrica> <ponto> <diretorio exec. nao otimizado> <diretorio exec. otimizado> 
+        - Este script compara um métrica selecionada, para o programa não otimizado e o otimizado, de um ponto escolhido 
+
+    5. comparaTodas
+        Uso: ./comparaTodas <ponto> <diretorio exec. nao otimizado> <diretorio exec. otimizado>
+        - Este script compara todas as métricas informadas, para o programa não otimizado e o otimizado, de um ponto escolhido 
+
+OBSERVAÇÕES:
+
+    1. Devido a Otimização de Blocking, a função multMatMat() funciona apenas valores acima ou igual a 8. O motivo é que
+       fator de Blocking (BK, declado em Matriz.h) é 8. Como ele divide a ordem da matriz, ela deve ser no minimo 8 para
+       que o cálculo seja realizado
+    
+    2. 
+
+

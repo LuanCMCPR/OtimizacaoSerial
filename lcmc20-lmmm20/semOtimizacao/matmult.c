@@ -4,10 +4,17 @@
 #include <getopt.h>    /* getopt */
 #include <time.h>
 #include <likwid.h>
-#include <likwid-marker.h>
+// #include <likwid-marker.h> #DINF não precisa
 #include "matriz.h"
 
-#define DEBUG 1
+typedef double rtime_t;
+
+rtime_t timestamp (void)
+{
+  struct timespec tp;
+  clock_gettime(CLOCK_MONOTONIC_RAW, &tp);
+  return ( (rtime_t) tp.tv_sec*1.0e3 + (rtime_t) tp.tv_nsec*1.0e-6 );
+}
 
 /**
  * Exibe mensagem de erro indicando forma de uso do programa e termina
@@ -19,8 +26,6 @@ static void usage(char *progname)
   fprintf(stderr, "Forma de uso: %s [ <ordem> ] \n", progname);
   exit(1);
 }
-
-
 
 /**
  * Programa principal
@@ -35,6 +40,7 @@ int main (int argc, char *argv[])
   
   MatRow mRow_1, mRow_2, resMat;
   Vetor vet, res;
+  rtime_t tempo;
   
   /* =============== TRATAMENTO DE LINHA DE COMANDO =============== */
 
@@ -44,8 +50,8 @@ int main (int argc, char *argv[])
   n = atoi(argv[1]);
   
   /* ================ FIM DO TRATAMENTO DE LINHA DE COMANDO ========= */
-  // LIKWID_MARKER_INIT
-  likwid_markerInit();
+  LIKWID_MARKER_INIT;
+  // likwid_markerInit();
   srandom(20232);
       
   res = geraVetor(n, 1);
@@ -63,17 +69,24 @@ int main (int argc, char *argv[])
     printf ("=================================\n\n");
 #endif /* _DEBUG_ */
   
-  // LIKWID_MARKER_START("multMatVet");
-  likwid_markerStartRegion("multMatVet");
+  tempo = timestamp();
+  LIKWID_MARKER_START("multMatVet");
+  // likwid_markerStartRegion("multMatVet");
   multMatVet (mRow_1, vet, n, n, res);
-  likwid_markerStopRegion("multMatVet");
-  // LIKWID_MARKER_STOP("multMatVet");
+  // likwid_markerStopRegion("multMatVet");
+  LIKWID_MARKER_STOP("multMatVet");
+  tempo = timestamp() - tempo;
+  printf("%lf\n", tempo);
 
-  // LIKWID_MARKER_START("multMatMat");
-  likwid_markerStartRegion("multMatMat");
+  tempo = timestamp();
+  LIKWID_MARKER_START("multMatMat");
+  // likwid_markerStartRegion("multMatMat");
   multMatMat (mRow_1, mRow_2, n, resMat);
-  likwid_markerStopRegion("multMatMat");
-  // LIKWID_MARKER_STOP("multMatMat");
+  // likwid_markerStopRegion("multMatMat");
+  LIKWID_MARKER_STOP("multMatMat");
+  tempo = timestamp() - tempo;
+  printf("%lf\n", tempo);
+
 
 #ifdef DEBUG
     prnVetor (res, n);
@@ -86,8 +99,8 @@ int main (int argc, char *argv[])
   liberaVetor ((void*) vet);
   liberaVetor ((void*) res);
 
-  likwid_markerClose();
-  // LIKWID_MARKER_CLOSE
+  // likwid_markerClose();
+  LIKWID_MARKER_CLOSE;
   return 0;
 }
 
