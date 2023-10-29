@@ -3,6 +3,12 @@
 # Uso: ./compara <métrica> <ponto> 
 #METRICAS=" TEMPO L2CACHE L3 ENERGY FLOPS_DP"
 
+if [ $# -ne 2 ]
+then
+	echo "Uso: ./compara <métrica> <ponto>"
+	exit 1
+fi
+
 CORE=3
 M=$1
 P=$2

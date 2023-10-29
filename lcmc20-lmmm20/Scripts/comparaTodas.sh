@@ -2,6 +2,11 @@
 
 # Uso: ./comparaTodas <ponto>
 
+if [ $# -ne 1 ]
+then
+	echo "Uso: ./comparaTodas <ponto>"
+	exit 1
+fi
 
 METRICA="L2CACHE L3 ENERGY FLOPS_DP"
 CORE=3  

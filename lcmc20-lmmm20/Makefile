@@ -14,10 +14,19 @@ all:
 	@cp "$(DIR2)/$(EX2)" .
 	@echo "Pronto!"
 
+markers:
+	@echo "Compilando com marcadores..."
+	@make CFLAGS="-I$LIKWID_INCLUDE -DLIKWID_PERFMON" -sBC $(DIR1)
+	@make CFLAGS="-I$LIKWID_INCLUDE -DLIKWID_PERFMON" -sBC $(DIR2)
+	@cp "$(DIR1)/$(EX1)" .
+	@cp "$(DIR2)/$(EX2)" .
+	@echo "Pronto!"
+
 clean:
 	@echo "Limpando sujeira..."
 	@make clean -sC $(DIR1)
 	@make clean -sC $(DIR2)
+	rm -f *.sh *.gp
 
 purge: clean
 	@echo "Faxina..."
@@ -38,3 +47,7 @@ gerarGrafico:
 	@cp Scripts/plotarGrafico.gp .
 	@chmod u+x plotarGrafico.gp
 	@chmod u+x geraGraficos.sh
+
+diff:
+	@cp Scripts/testarDiff.sh .
+	@chmod u+x testarDiff.sh

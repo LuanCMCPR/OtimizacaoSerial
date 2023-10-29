@@ -1,6 +1,6 @@
 #!/usr/bin/gnuplot -c
 
-# Uso: gnuplot -c plotarGrafico.gp <arquivo1> <arquivo2> <titulo com metrica> <nome> <unidade eixo y> <metrica>
+# Uso: gnuplot -c plotarGrafico.gp <arquivo1> <arquivo2> <titulo do grafico> <nome_do_arquivo> <unidade eixo y> <metrica>
 # 6 argumentos 
 
 # variáveis para comparar não otimizado com otimizado

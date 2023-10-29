@@ -1,37 +1,49 @@
 
+COMO UTILIZAR (MAKE)
+    1. Rodando apenas make, irá gerar os executaveis sem a inclusão dos marcadores do likwid, 
+       porém se desejar utilizar com os marcadores, utilize a regra markers
+
+    2. Para facilitar a execução dos scripts existem regras do make exclusivas, que já fazem a cópia do script
+       mais informações no tópico "SCRIPTS":
+        compara
+        comparaTodas
+        geraGraficos
+
+    3. Para limpar as pastas (sem remover os executaveis) e remover os scripts, utilize a regra clean
+
+    4. Para limpar tudo e deixar apenas os arquivos fonte, utilize a regra purge
+
+
 
 SCRIPTS:
 
-    1. perfectr_pontos
-        Uso: ./perfctr_pontos <executavel> <flag> <diretorio de saida>
-        flag:Utilizar "o" para quando executar com o programa otimizado
-             Utilizar "n" para quando executar com o programa não otimizado
-        - Para cada metrica indicada, salvando em arquivos, com nomes já predefinidos, o resultado obtido para cada ponto informado
-        deve ser informado também um diretório para salvar os arquivos com os dados de cada métrica
+    1. perfectr_pontos.sh
+        Uso: ./perfctr_pontos <executavel> <diretorio de saida>
+        - Executa o programa para cada metrica indicada, salvando em arquivos, com nomes já predefinidos, o resultado obtido para cada ponto informado
+        deve ser informado também um diretório para salvar os arquivos gerados
+        - Os arquivos com os dados para cada métrica estão separados de acordo com o nome da função, os que possuem nome multMatVet são referentes
+        a multiplicação de matriz por vetor. Os que possuem nome multMatMat são referentes a multiplicação de matriz por matriz. 
+        - Os arquivos que possuem OTZ no meio do nome são referentes ao programa otimizado, os que não possuem são referentes ao programa não otimizado. 
 
     2. geraGraficos.sh
         Uso: ./geraGraficos.sh  <diretorio_de_entrada_pontos_nao_otimizado > <diretorio_de_entrada_pontos_otimizados> <diretorio_salvar_gráficos>
         - Este script gera os gráficos de comparação de métricas, deve ser informado onde estão os dados das metricas do programa não otimizado
         ,do programa otimizado e também um diretório onde serão salvos os gráficos gerados.
     
-    3. plotarGraico.gp
-        Uso: Gnuplot -c plotarGrafico.gp <arquivo1> <arquivo2> <titulo com metrica> <nome> <unidade eixo y> <metrica>
-        - Este script gera o gráfico de comparação
+    3. plotarGrafico.gp
+        Uso: gnuplot -c plotarGrafico.gp <arquivo1> <arquivo2> <titulo do grafico> <nome_do_arquivo> <unidade eixo y> <metrica>
+        - Este script gera o gráfico de comparação entre dois arquivos, o argumento <metrica> é apenas para decidir qual será o tipo de gráfico
 
-    4. compara
-        Uso: ./compara <métrica> <ponto> <diretorio exec. nao otimizado> <diretorio exec. otimizado> 
-        - Este script compara um métrica selecionada, para o programa não otimizado e o otimizado, de um ponto escolhido 
+    4. compara.sh
+        Uso: ./compara <métrica> <ponto> 
+        - Este script mostra os resultados da métrica informada, para o programa não otimizado e o otimizado, do um ponto escolhido 
 
-    5. comparaTodas
-        Uso: ./comparaTodas <ponto> <diretorio exec. nao otimizado> <diretorio exec. otimizado>
-        - Este script compara todas as métricas informadas, para o programa não otimizado e o otimizado, de um ponto escolhido 
+    5. comparaTodas.sh
+        Uso: ./comparaTodas <ponto>
+        - Este script mostra os resultados das métricas informadas, para o programa não otimizado e o otimizado, do um ponto escolhido 
 
 OBSERVAÇÕES:
 
-    1. Devido a Otimização de Blocking, a função multMatMat() funciona apenas valores acima ou igual a 8. O motivo é que
-       fator de Blocking (BK, declado em Matriz.h) é 8. Como ele divide a ordem da matriz, ela deve ser no minimo 8 para
-       que o cálculo seja realizado
-    
-    2. 
+    1.  
 
 
