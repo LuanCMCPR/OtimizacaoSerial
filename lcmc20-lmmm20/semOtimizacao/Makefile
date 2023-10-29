@@ -36,3 +36,7 @@ purge: clean
 compact:
 	@echo "Compactando arquivos..."
 	tar -czvf $(DIR).tar.gz $(addprefix ../$(DIR)/, $(FILES))
+
+# Ativa flags de debug
+debug: FLAGS += -DDEBUG -D_DEBUG_
+debug: all
