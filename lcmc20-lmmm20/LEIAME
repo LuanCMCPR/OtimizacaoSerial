@@ -1,3 +1,5 @@
+#   Luan Carlos Maia Cruz - GRR20203891
+#   Leonardo Marin Mendes Martin - GRR20205675
 
 COMO UTILIZAR (MAKE):
     1. Rodando apenas make, irá gerar os executáveis sem a inclusão dos marcadores do likwid.
@@ -5,11 +7,11 @@ COMO UTILIZAR (MAKE):
 
     2. Para facilitar a execução dos scripts existem regras do make exclusivas, que já fazem a cópia do script
        mais informações no tópico "SCRIPTS":
-        compara.sh
-        comparaTodas.sh
-        geraGraficos.sh
-        perfctr_pontos.sh
-        testarDiff.sh
+        compara
+        comparaTodas
+        gerarGraficos
+        gerarPontos
+        diff
 
 
     3. Para limpar as pastas (sem remover os executaveis) e remover os scripts, utilize a regra clean
@@ -19,6 +21,8 @@ COMO UTILIZAR (MAKE):
     5. Para mostrar as matrizes geradas e também os resultados, utilize a regra debug
 
     6. Para mostrar somente os resultados, utilize a regra results
+
+    7. A regra compact criar um arquivo tar.gz
 
 SCRIPTS:
 
@@ -58,7 +62,7 @@ DIRETÓRIOS:
     Otimizado: Diretório com os arquivos fonte que possuem as otimização de código 
     SemOtimizacao: Diretório com os arquivos fonte originais
     Scripts: Diretório com os Scripts auxiliares
-    Gráficos: Diretório com os arquivos que possuem os dados de cada métrica e os gráficos de comparação gerados
+    Dados_Graficos: Diretório com os arquivos que possuem os dados de cada métrica e os gráficos de comparação gerados
     Makefile: Arquivo com diversas regras para facilitar a utilização do projeto (Ver tópico: COMO UTILIZAR)
     topologiaH13.txt: Arquivo com a topoligia da máquina H13 do lab 12 do DINF
     LEIAME: Documento para orientar como executar o projeto 
@@ -68,6 +72,10 @@ OBSERVAÇÕES:
     1. Utilizamos o BK igual a 8 devido ao tamanho da cache line, que é 64 bytes, e o tamanho de um double é 8 bytes, então para que o vetor caiba
        na cache line, o tamanho do bloco deve ser 8.
 
-    2. A L2CACHE para a multiplicação de matrizes, fica um pouco maior na versão otimizada comparada ao versão não otimizada em certos pontos
+    2.
 
+    3. O Script que geraPontos demorou cerca de 16 minutos para gerar todos os pontos do programa não otimizado
 
+    4. O Script que geraPontos demorou cerca de 4 minutos para gerar todos os pontos do programa otimizado
+
+    5. A maior dificuldade foi tentar melhorar mais as métricas de L2CACHE e L3 que são relacionadas a memória 

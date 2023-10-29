@@ -6,7 +6,7 @@ EX2="matmultOtimizado"
 DIR1="semOtimizacao"
 DIR2="Otimizado"
 DIR="lcmc20-lmmm20"
-FILES="*.sh *.gp $(DIR).tar.gz"
+FILES=*.sh *.gp $(DIR).tar.gz
 
 all:
 	@echo "Compilando..."
@@ -78,7 +78,7 @@ debug:
 # Gera um arquivo compactado com os arquivos necessários para execução do programa
 compact:
 	@echo "Compactando arquivos..."
-	tar -czvf $(DIR).tar.gz $(addprefix ../$(DIR)/, $(FILES))
+	tar -czvf $(DIR).tar.gz $(addprefix ../$(DIR)/, *)
 
 # Ativa flags de debug que mostram o resultado
 results:
