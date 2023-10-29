@@ -15,24 +15,32 @@ TAM="64 100 128" # 200 256 512 600 900 1024 2000 2048 3000 4000"
 T="TEMPO"
 CORE=3
 EXEC=$1
-DIR=$2
+D1="semOtimizacao"
+D2="Otimizado"
 
 
 # Gera arquivo com nomes diferentes, para facilitar a criacao dos graficos
 # flag o é para gerar os arquivos de entrada do programa otimizado
 if [ ${EXEC} == "./matmultOtimizado" ]; then
+	make -sBC $D2
+	cp "$D2/$EXEC" ./
 	F1="multmatVetOTZ"
 	F2="multmatMatOTZ"
-elif [ ${EXEC} == "./matmult" ]; then 
+	DIR=$D2
+elif [ ${EXEC} == "./matmult" ]; then
+	make -sBC $D1
+	cp "$D1/$EXEC" ./
 	F1="multmatVet"
 	F2="multmatMat"
+	DIR=$D1
 else
-	echo "Digite um flag válida"
+	echo "Executavel invalido: ${EXEC}"
+	echo "Executaveis: ./matmult e ./matmultOtimizado"
+	exit 1
 fi
 
 echo "performance" > /sys/devices/system/cpu/cpufreq/policy$CORE/scaling_governor
 # Compila o programa sem os marcadores, para obter o tempo de execucao
-make -B >> /dev/null
 
 touch $F1$T.dat
 touch $F2$T.dat
@@ -49,7 +57,8 @@ do
 done
 
 # Compila o programa com os marcadores do likwid, para poder obter as metricas
-make -B CFLAGS="-I$LIKWID_INCLUDE -DLIKWID_PERFMON" > /dev/null
+make CFLAGS="-I$LIKWID_INCLUDE -DLIKWID_PERFMON" -sBC $DIR
+cp "$DIR/$EXEC" ./
 
 for k in $METRICA	
 do
@@ -102,6 +111,7 @@ done
 
 echo "powersave" > /sys/devices/system/cpu/cpufreq/policy$CORE/scaling_governor
 
+DIR=$2
 # Move arquivos para o diretório de saída
 mkdir -p $DIR
 mv *.csv $DIR

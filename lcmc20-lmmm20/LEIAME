@@ -41,9 +41,18 @@ SCRIPTS:
     5. comparaTodas.sh
         Uso: ./comparaTodas <ponto>
         - Este script mostra os resultados das métricas informadas, para o programa não otimizado e o otimizado, do um ponto escolhido 
+    
+    6. testarDiff.sh
+        Uso: ./testarDiff.sh
+        - Este script executa o programa não otimizado e o otimizado, para cada ponto informado, e compara os resultados obtidos, mostrando a diferença
+        Foi utilizado apenas para verificar se os resultados obtidos eram iguais, para que os testes fossem feitos com os mesmos pontos e não houvesse  
+        diferença nos resultados obtidos.
 
 OBSERVAÇÕES:
 
-    1.  
+    1. Utilizamos o BK igual a 8 devido ao tamanho da cache line, que é 64 bytes, e o tamanho de um double é 8 bytes, então para que o vetor caiba
+       na cache line, o tamanho do bloco deve ser 8.
+
+    2. A L2CACHE para a multiplicação de matrizes, fica um pouco maior na versão otimizada comparada ao versão não otimizada
 
 

@@ -69,24 +69,22 @@ int main (int argc, char *argv[])
     printf ("=================================\n\n");
 #endif /* _DEBUG_ */
   
-  tempo = timestamp();
-  LIKWID_MARKER_START("multMatVet");
-  // likwid_markerStartRegion("multMatVet");
-  multMatVet (mRow_1, vet, n, n, res);
-  // likwid_markerStopRegion("multMatVet");
-  LIKWID_MARKER_STOP("multMatVet");
-  tempo = timestamp() - tempo;
-  printf("%lf\n", tempo);
-
-  tempo = timestamp();
-  LIKWID_MARKER_START("multMatMat");
-  // likwid_markerStartRegion("multMatMat");
-  multMatMat (mRow_1, mRow_2, n, resMat);
-  // likwid_markerStopRegion("multMatMat");
-  LIKWID_MARKER_STOP("multMatMat");
-  tempo = timestamp() - tempo;
-  printf("%lf\n", tempo);
-
+tempo = timestamp();
+LIKWID_MARKER_START("multMatVet");
+// likwid_markerStartRegion("multMatVet");
+multMatVet (mRow_1, vet, n, n, res);
+// likwid_markerStopRegion("multMatVet");
+LIKWID_MARKER_STOP("multMatVet");
+tempo = timestamp() - tempo;
+printf("%lf\n", tempo);
+tempo = timestamp();
+LIKWID_MARKER_START("multMatMat");
+// likwid_markerStartRegion("multMatMat");
+multMatMat (mRow_1, mRow_2, n, resMat);
+// likwid_markerStopRegion("multMatMat");
+LIKWID_MARKER_STOP("multMatMat");
+tempo = timestamp() - tempo;
+printf("%lf\n", tempo);
 
 #ifdef DEBUG
     prnVetor (res, n);
