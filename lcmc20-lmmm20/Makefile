@@ -75,6 +75,16 @@ debug:
 	@cp "$(DIR2)/$(EX2)" .
 	@echo "Pronto!"
 
+# Gera um arquivo compactado com os arquivos necessários para execução do programa
 compact:
 	@echo "Compactando arquivos..."
 	tar -czvf $(DIR).tar.gz $(addprefix ../$(DIR)/, $(FILES))
+
+# Ativa flags de debug que mostram o resultado
+results:
+	@echo "Compilando com Debub de Resultados..."
+	@make results -sBC $(DIR1)
+	@make results -sBC $(DIR2)
+	@cp "$(DIR1)/$(EX1)" .
+	@cp "$(DIR2)/$(EX2)" .
+	@echo "Pronto!"

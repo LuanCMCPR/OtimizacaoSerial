@@ -1,19 +1,24 @@
 
-COMO UTILIZAR (MAKE)
-    1. Rodando apenas make, irá gerar os executaveis sem a inclusão dos marcadores do likwid, 
-       porém se desejar utilizar com os marcadores, utilize a regra markers
+COMO UTILIZAR (MAKE):
+    1. Rodando apenas make, irá gerar os executáveis sem a inclusão dos marcadores do likwid.
+       Se desejar utilizar com os marcadores, utilize a regra markers
 
     2. Para facilitar a execução dos scripts existem regras do make exclusivas, que já fazem a cópia do script
        mais informações no tópico "SCRIPTS":
-        compara
-        comparaTodas
-        geraGraficos
+        compara.sh
+        comparaTodas.sh
+        geraGraficos.sh
+        perfctr_pontos.sh
+        testarDiff.sh
+
 
     3. Para limpar as pastas (sem remover os executaveis) e remover os scripts, utilize a regra clean
 
     4. Para limpar tudo e deixar apenas os arquivos fonte, utilize a regra purge
 
+    5. Para mostrar as matrizes geradas e também os resultados, utilize a regra debug
 
+    6. Para mostrar somente os resultados, utilize a regra results
 
 SCRIPTS:
 
@@ -33,6 +38,7 @@ SCRIPTS:
     3. plotarGrafico.gp
         Uso: gnuplot -c plotarGrafico.gp <arquivo1> <arquivo2> <titulo do grafico> <nome_do_arquivo> <unidade eixo y> <metrica>
         - Este script gera o gráfico de comparação entre dois arquivos, o argumento <metrica> é apenas para decidir qual será o tipo de gráfico
+        - E necessário ter o gnuplot instalado
 
     4. compara.sh
         Uso: ./compara <métrica> <ponto> 
@@ -48,11 +54,20 @@ SCRIPTS:
         Foi utilizado apenas para verificar se os resultados obtidos eram iguais, para que os testes fossem feitos com os mesmos pontos e não houvesse  
         diferença nos resultados obtidos.
 
+DIRETÓRIOS:
+    Otimizado: Diretório com os arquivos fonte que possuem as otimização de código 
+    SemOtimizacao: Diretório com os arquivos fonte originais
+    Scripts: Diretório com os Scripts auxiliares
+    Gráficos: Diretório com os arquivos que possuem os dados de cada métrica e os gráficos de comparação gerados
+    Makefile: Arquivo com diversas regras para facilitar a utilização do projeto (Ver tópico: COMO UTILIZAR)
+    topologiaH13.txt: Arquivo com a topoligia da máquina H13 do lab 12 do DINF
+    LEIAME: Documento para orientar como executar o projeto 
+
 OBSERVAÇÕES:
 
     1. Utilizamos o BK igual a 8 devido ao tamanho da cache line, que é 64 bytes, e o tamanho de um double é 8 bytes, então para que o vetor caiba
        na cache line, o tamanho do bloco deve ser 8.
 
-    2. A L2CACHE para a multiplicação de matrizes, fica um pouco maior na versão otimizada comparada ao versão não otimizada
+    2. A L2CACHE para a multiplicação de matrizes, fica um pouco maior na versão otimizada comparada ao versão não otimizada em certos pontos
 
 

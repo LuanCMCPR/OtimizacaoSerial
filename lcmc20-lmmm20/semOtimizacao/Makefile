@@ -40,3 +40,7 @@ compact:
 # Ativa flags de debug
 debug: FLAGS += -DDEBUG -D_DEBUG_
 debug: all
+
+# Ativa flag de debug que mostra o resultado da operação
+results: FLAGS += -DDEBUG
+results: all
