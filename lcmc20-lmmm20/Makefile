@@ -5,7 +5,6 @@ EX1="matmult"
 EX2="matmultOtimizado"
 DIR1="semOtimizacao"
 DIR2="Otimizado"
-SCRIPTS="compara.sh comparaTodas.sh gerarGrafico.sh perfctr_pontos" 
 
 all:
 	@echo "Compilando..."
@@ -24,12 +23,18 @@ purge: clean
 	@echo "Faxina..."
 	@make purge -sC $(DIR1)
 	@make purge -sC $(DIR2)
-	@rm -f $(EX1) $(EX2) $(SCRIPTS)
+	@rm -f $(EX1) $(EX2) *.sh *.gp
 
 comparaTodas:
 	@cp Scripts/comparaTodas.sh .
-	@chmod u+x comparaTodas.s
+	@chmod u+x comparaTodas.sh
 
 compara:
 	@cp Scripts/compara.sh .
 	@chmod u+x compara.sh
+
+gerarGrafico:
+	@cp Scripts/geraGraficos.sh .
+	@cp Scripts/plotarGrafico.gp .
+	@chmod u+x plotarGrafico.gp
+	@chmod u+x geraGraficos.sh

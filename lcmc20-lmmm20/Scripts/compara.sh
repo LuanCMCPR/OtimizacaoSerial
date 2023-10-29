@@ -48,8 +48,7 @@ echo "performance" > /sys/devices/system/cpu/cpufreq/policy${CORE}/scaling_gover
 	echo ${M}
 	for i in {1..2}
 	do
-		
-		echo $EX
+	
 		echo ${D}
 		likwid-perfctr -C $CORE -g $M -m -o "$M.csv" $EX $P > /dev/null
 
