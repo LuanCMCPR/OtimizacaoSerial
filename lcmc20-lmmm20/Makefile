@@ -48,6 +48,11 @@ gerarGrafico:
 	@chmod u+x plotarGrafico.gp
 	@chmod u+x geraGraficos.sh
 
+gerarPontos:
+	@cp Scripts/perfctr_pontos.sh .
+	@chmod u+x perfctr_pontos.sh
+
 diff:
 	@cp Scripts/testarDiff.sh .
 	@chmod u+x testarDiff.sh
+
