@@ -5,10 +5,11 @@
 
 #define DEF_SIZE 128
 #define BASE 32
+
 #define UF 4
 #define BK 8
 
-#define SB (CLS / sizeof(real_t))
+// #define SB (CLS / sizeof(real_t))
 
 #define ABS(num)  ((num) < 0.0 ? -(num) : (num))
 

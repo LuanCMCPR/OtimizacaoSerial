@@ -175,22 +175,14 @@ void multMatMat (MatRow restrict A, MatRow restrict B, int n, MatRow restrict C)
 {
   /* Loop Blocking */
   int lim = (n/BK);
-  /* Delimita bloco de linhas de Início e Fim da Primeira Matriz */
-  for(int ls=0; ls < lim; ++ls)
-  {  
-    int istart = ls*BK;
-    int iend = istart+BK;
-    /* Delimita bloco das colunas de Início e Fim da Segunda Matriz */
-    for(int cs=0; cs < lim; ++cs)
-    {
-      int jstart = cs*BK;
-      int jend = jstart+BK;
-      /* Delimita bloco das colunas de Início e Fim da Primeira Matriz 
-         e Delimita linha das colunas de Início e Fim da Segunda Matriz */
-      for(int rs=0; rs < lim; ++rs)
-      {
-        int kstart = rs*BK;
-        int kend = kstart+BK;
+  // int max = (n-(n%UF))%BK;
+  int max = (n-(n%BK));
+  for(int ls=0; ls < lim; ++ls) {  
+    int istart = ls*BK; int iend = istart+BK;
+    for(int cs=0; cs < lim; ++cs) {
+      int jstart = cs*BK; int jend = jstart+BK;
+      for(int rs=0; rs < lim; ++rs) { 
+        int kstart = rs*BK; int kend = kstart+BK;
         /* Loop Unroll + Jam */
         for (int i=istart; i < iend; ++i)
         {
@@ -207,25 +199,23 @@ void multMatMat (MatRow restrict A, MatRow restrict B, int n, MatRow restrict C)
         }
       }
     }
-  
-    int lim = (n-(n%UF));
-    
-    for(int i = 0; i < n; ++i)
-      for(int j = 0; j < n; ++j)
-        for(int k = lim; k < n; ++k)
-          C[i*n+j] += A[i*n+k] * B[k*n+j];
-
-    for(int i = 0; i < lim; ++i)
-      for(int j = lim; j < n; ++j)
-        for(int k = 0; k < lim; ++k)
-          C[i*n+j] += A[i*n+k] * B[k*n+j];
-
-  
-    for(int i = lim; i < n; ++i)
-      for(int j = 0; j < n; ++j)
-        for(int k = 0; k < lim; ++k)
-          C[i*n+j] += A[i*n+k] * B[k*n+j];
   }
+
+  for(int i = 0; i < max; ++i)
+    for(int j = max; j < n; ++j)
+      for(int k = 0; k < n; ++k)
+        C[i*n+j] += A[i*n+k] * B[k*n+j]; 
+
+  for(int i = 0; i < max; ++i)
+    for(int j = 0; j < max; ++j)
+      for(int k = max; k < n; ++k)
+        C[i*n+j] += A[i*n+k] * B[k*n+j];
+
+  for(int i = max; i < n; ++i)
+    for(int j = 0; j < n; ++j)
+      for(int k = 0; k < n; ++k)
+        C[i*n+j] += A[i*n+k] * B[k*n+j];
+
 }
 
 
